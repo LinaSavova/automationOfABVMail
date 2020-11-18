@@ -11,7 +11,7 @@ public class LogOutTests extends BaseTests {
     @Test
     public static void successfulLogOut(){
         LogIn.goTo();
-        LogIn.logIn("barny1234", "Barny123456");
+        LogIn.logIn("putUsername", "putPassword");
         Home.logOut();
         Gyuvech.verifyUserIsLoggedOut("Gyuvech header is not loaded after logout");
     }

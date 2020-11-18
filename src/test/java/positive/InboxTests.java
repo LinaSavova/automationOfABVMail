@@ -12,14 +12,14 @@ public class InboxTests extends BaseTests {
     @Test
     public void goToInbox(){
         LogIn.goTo();
-        LogIn.logIn("barny1234", "Barny123456");
+        LogIn.logIn("putUsername", "putPassword");
         Home.goToInbox();
         Inbox.verifyUserIsIntoInbox("Сортирай", "Sort option is missing or renamed");
     }
     @Test
     public void deleteAnEmail(){
         LogIn.goTo();
-        LogIn.logIn("barny1234", "Barny123456");
+        LogIn.logIn("putUsername", "putPassword");
         Home.goToInbox();
         Inbox.deleteAnEmail();
         // The verification is into the method itself
@@ -32,7 +32,7 @@ public class InboxTests extends BaseTests {
     @Test
     public void selectAndDeleteAll(){
         LogIn.goTo();
-        LogIn.logIn("kostata34", "aA123456$");
+        LogIn.logIn("putUsername", "putPassword");
         Home.goToInbox();
         Inbox.deleteAllInInbox();
         Inbox.verifyAllEmailsDeleted("Папката е празна", "Message when all emails are deleted is not present");
@@ -40,14 +40,14 @@ public class InboxTests extends BaseTests {
     @Test
     public void moveEmailToAnotherFolder(){
         LogIn.goTo();
-        LogIn.logIn("smelichkata@abv.bg", "smelichkata123456");
+        LogIn.logIn("putUsername", "putPassword");
         Inbox.moveAnEmailToBinFolder(1);
         // The verification is into the method itself
     }
     @Test
     public void flagAnEmail(){
         LogIn.goTo();
-        LogIn.logIn("barny1234", "Barny123456");
+        LogIn.logIn("putUsername", "putPassword");
         Home.goToInbox();
         Inbox.flag();
         Inbox.verifyEmailIsFlagged("Email not flagged");
@@ -61,7 +61,7 @@ public class InboxTests extends BaseTests {
     @Test
     public void markAsRead(){
         LogIn.goTo();
-        LogIn.logIn("barny1234", "Barny123456");
+        LogIn.logIn("putUsername", "putPassword");
         Home.goToInbox();
         Inbox.markAsRead(5);
         // The verification is into the method itself
@@ -69,7 +69,7 @@ public class InboxTests extends BaseTests {
     @Test
     public void markAsUnread(){
         LogIn.goTo();
-        LogIn.logIn("barny1234", "Barny123456");
+        LogIn.logIn("putUsername", "putPassword");
         Home.goToInbox();
         Inbox.marksAsUnread(4);
         // The verification is into the method itself
@@ -77,28 +77,28 @@ public class InboxTests extends BaseTests {
     @Test
     public void markAsSpam() {
         LogIn.goTo();
-        LogIn.logIn("barny1234", "Barny123456");
+        LogIn.logIn("putUsername", "putPassword");
         Inbox.markAsSpam(3);
         // The verification is into the method itself
     }
     @Test
     public void markAsFishing(){
         LogIn.goTo();
-        LogIn.logIn("barny1234", "Barny123456");
+        LogIn.logIn("putUsername", "putPassword");
         Inbox.markAsFishing(2);
         // The verification is into the method itself
     }
     @Test
     public void sortBy(){
         LogIn.goTo();
-        LogIn.logIn("barny1234", "Barny123456");
+        LogIn.logIn("putUsername", "putPassword");
         Home.goToInbox();
         Inbox.sortEmailsBy(8);
     }
     @Test
     public void goToNextPage(){
         LogIn.goTo();
-        LogIn.logIn("barny1234", "Barny123456");
+        LogIn.logIn("putUsername", "putPassword");
         Home.goToInbox();
         Inbox.goToNextPage();
         // The verification is into the method itself
@@ -106,7 +106,7 @@ public class InboxTests extends BaseTests {
     @Test
     public void goToPreviousPage(){
         LogIn.goTo();
-        LogIn.logIn("barny1234", "Barny123456");
+        LogIn.logIn("putUsername", "putPassword");
         Home.goToInbox();
         Inbox.goToPreviousPage();
         // The verification is into the method itself
@@ -138,7 +138,7 @@ public class InboxTests extends BaseTests {
     @Test
     public void forwardEmail(){
         goToInbox();
-        Inbox.forwardEmail(1, "smelichkata@abv.bg");
+        Inbox.forwardEmail(1, "putEmailToForwardTo");
         Write.verifyEmailIsSent("Писмото беше изпратено успешно!", "Confirmation for sent message is not displayed");
     }
     @Test
@@ -150,7 +150,7 @@ public class InboxTests extends BaseTests {
     @Test
     public void openPreviousEmail(){
         LogIn.goTo();
-        LogIn.logIn("barny1234", "Barny123456");
+        LogIn.logIn("putUsername", "putPassword");
         Home.goToInbox();
         Inbox.openPrevEmail(4, "The same date attributes appear");
         // Verification is into the method itself
@@ -158,7 +158,7 @@ public class InboxTests extends BaseTests {
     @Test
     public void openNextEmail(){
         LogIn.goTo();
-        LogIn.logIn("barny1234", "Barny123456");
+        LogIn.logIn("putUsername", "putPassword");
         Home.goToInbox();
         Inbox.openNextEmail(4, "The same date attributes appear");
         // 17111Verification is into the method itself

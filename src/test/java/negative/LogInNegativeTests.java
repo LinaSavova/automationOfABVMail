@@ -11,10 +11,10 @@ public class LogInNegativeTests extends BaseTests {
     public Object[][] testData(){
         String[][] testData = {
                 {"kikoni", "1234"}, //wrong user, wrong pass
-                {"BARNY!@#$", "Barny123456"}, //right credentials, but entered in a CAPSLOCK mode
-                {"фьихщ1234", "Фьихщ123456"}, //right credentials, but entered in Cyrillic
-                {"barny1234", "123456"}, //right user, wrong pass
-                {"barny123", "Barny123456"}, //wrong user, right pass
+                {"BARNY!@#$", "Barny45"}, //right credentials, but entered in a CAPSLOCK mode
+                {"фьихщ1234", "Фьихщ45"}, //right credentials, but entered in Cyrillic
+                {"barny1234", "12345678"}, //right user, wrong pass
+                {"barny123", "Barny45"}, //wrong user, right pass
         };
         return testData;
     }

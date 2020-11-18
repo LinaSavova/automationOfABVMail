@@ -11,14 +11,14 @@ public class SearchTests extends BaseTests {
     @Test
     public void searchForEmails(){
         LogIn.goTo();
-        LogIn.logIn("smelichkata", "smelichkata123456");
+        LogIn.logIn("putUsername", "putPassword");
         Search.searchForEmails("Barny");
         Home.verifyEmailsAreSearched("Резултати от търсене", "Results message is not displayed");
     }
     @Test
     public void advancedSearch(){
         LogIn.goTo();
-        LogIn.logIn("smelichkata", "smelichkata123456");
+        LogIn.logIn("putUsername", "putPassword");
         Search.advancedSearch("b", "b", "Test");
         Home.verifyEmailsAreSearched("Резултати от търсене", "Results message is not displayed");
     }

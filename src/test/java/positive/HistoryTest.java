@@ -10,7 +10,7 @@ public class HistoryTest extends BaseTests {
     @Test
     public void historyOfEntrance(){
         LogIn.goTo();
-        LogIn.logIn("barny1234", "Barny123456");
+        LogIn.logIn("putUsername", "putPassword");
         Home.checkHistoryOfEntrance();
         Home.verifyHistoryIsLoaded("История", "Not the proper title is appearing");
     }

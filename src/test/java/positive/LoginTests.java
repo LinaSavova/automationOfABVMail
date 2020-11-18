@@ -10,7 +10,7 @@ public class LoginTests extends BaseTests {
     @Test
     public static void successfulLogIn(){
         LogIn.goTo();
-        LogIn.logIn("barny1234", "Barny123456");
+        LogIn.logIn("putUsername", "putPassword");
         Home.verifyLogIn("Email not displayed when user is logged in");
     }
 }

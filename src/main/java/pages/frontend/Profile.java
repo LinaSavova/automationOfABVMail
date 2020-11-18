@@ -18,7 +18,6 @@ public class Profile extends BasePage {
     private static final By SAVE_BUTTON = By.cssSelector(".abv-row.x.abv-submitRow input");
     private static final By CONFIRMATION_EDIT_SUCCESSFUL = By.cssSelector(".abv-messageinfo");
 
-
     /**
      * Verify user is actually logged in to his profile
      * @param messageOnFailure message to appear if no Back to ABV option is displayed
@@ -42,7 +41,6 @@ public class Profile extends BasePage {
         click(SAVE_BUTTON);
     }
 
-
     /**
      * Verify profile is successfully edited
      * @param expectedMessage confirmation message that appears after profile is edited
@@ -51,5 +49,12 @@ public class Profile extends BasePage {
     public static void verifyProfileIsEdited(String expectedMessage, String messageOnFailure) {
         String actualMessage = Browser.driver.findElement(CONFIRMATION_EDIT_SUCCESSFUL).getText().trim();
         assertTrue(actualMessage.contains(expectedMessage), messageOnFailure);
+    }
+    
+     /**
+     * From Profile go back to ABV Home
+     */
+    public static void goBackToMail() {
+        click(BACK_TO_ABV);
     }
 }

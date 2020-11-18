@@ -24,4 +24,13 @@ public class ProfileTests extends BaseTests {
         Profile.editProfile();
         Profile.verifyProfileIsEdited("Промените са записани успешно!", "No confirmation message displayed");
     }
+    @Test
+    public void backToMail(){
+        LogIn.goTo();
+        LogIn.logIn("putUsername", "putPassword");
+        Home.goToInbox();
+        Home.goToProfile("putPassword");
+        Profile.goBackToMail();
+        Home.verifyLogIn("User is not to ABV mail");
+    }
 }

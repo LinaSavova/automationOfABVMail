@@ -11,7 +11,7 @@ public class BinTests extends BaseTests {
     @Test
     public void moveDeletedEmailBackToInbox(){
         LogIn.goTo();
-        LogIn.logIn("barny1234", "Barny123456");
+        LogIn.logIn("putUsername", "putPassword");
         Home.goToInbox();
         Inbox.deleteAnEmail();
         Home.goToBin();
@@ -21,7 +21,7 @@ public class BinTests extends BaseTests {
     @Test
     public void emptyBinFolder(){
         LogIn.goTo();
-        LogIn.logIn("barny1234", "Barny123456");
+        LogIn.logIn("putUsername", "putPassword");
         Bin.emptyBinFolder();
         Bin.verifyBinIsEmpty("Папката е празна", "No or wrong confirmation message for empty folder");
     }

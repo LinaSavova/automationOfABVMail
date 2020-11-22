@@ -2,7 +2,9 @@ package pages.frontend;
 
 import core.BasePage;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import utils.Browser;
 import static org.testng.Assert.*;
 
@@ -26,6 +28,14 @@ public class Home extends BasePage {
     private static final By PROFILE_BUTTON = By.id("gwt-uid-408");
     private static final By PASSWORD_FIELD = By.id("password");
     private static final By SUBMIT_PROFILE_BUTTON = By.xpath("//input[@type='submit']");
+    private static final By CREATE_FOLDER_BUTTON = By.cssSelector(".abv-addNewFolder");
+    private static final By NAME_FOLDER_FIELD = By.cssSelector(".abv-textBoxAdNewFolder");
+    private static final By SIDE_MENU_COLLECTION = By.xpath("//div[@class='abv-fMl5 abv-BrBot']//tr");
+    private static final By LAST_FOLDER = By.xpath("//div[@class='abv-fMl5 abv-BrBot']//tr[7]");
+    private static final By DELETE_FOLDER_OPTION = By.xpath("//div[@class='popupContent']//tr[3]/td");
+    private static final By CONFIRM_DELETE_FOLDER = By.ByLinkText.cssSelector(".cancelButtonWrapper .abv-button:nth-of-type(1)");
+    private static final By RENAME_FOLDER = By.xpath("//div[@class='popupContent']//tr[1]/td");
+    private static final By RENAME_INPUT = By.cssSelector(".GG3HBNKBJX input");
 
     /**
      * Verify user is successfully logged in with right credentials by seeing
@@ -121,10 +131,61 @@ public class Home extends BasePage {
     /**
      * Go to Profile
      */
-    public static void goToProfile() {
+    public static void goToProfile(String password) {
         click(USER_EMAIL_UPPER_MENU);
         click(PROFILE_BUTTON);
-        type(PASSWORD_FIELD, "Barny123456");
+        type(PASSWORD_FIELD, password);
         click(SUBMIT_PROFILE_BUTTON);
     }
+
+    /**
+     * Create a new folder in the side menu and verify it appears there
+     */
+    public static void addNewFolder() {
+        int numberOfFolders = Browser.driver.findElements(SIDE_MENU_COLLECTION).size();
+        System.out.println("The number of folders is: " + numberOfFolders);
+        click(CREATE_FOLDER_BUTTON);
+        type(NAME_FOLDER_FIELD, "Testing");
+        Browser.driver.findElement(NAME_FOLDER_FIELD).sendKeys(Keys.RETURN);
+        Browser.driver.navigate().refresh();
+        int numberOfFoldersAfterCreation = Browser.driver.findElements(SIDE_MENU_COLLECTION).size();
+        System.out.println("The number of folders after a new one is added: " + numberOfFoldersAfterCreation);
+        assertFalse(numberOfFoldersAfterCreation==numberOfFolders, "Folders count not increased");
+    }
+
+    /**
+     * Rename the last folder and verify it is renamed
+     */
+    public static void renameFolder() {
+        String lastFolderName = Browser.driver.findElement(LAST_FOLDER).getText().trim();
+        System.out.println("The current name of the last folder is: " + lastFolderName);
+        Actions action = new Actions(Browser.driver);
+        WebElement elementLocator = Browser.driver.findElement(LAST_FOLDER);
+        action.contextClick(elementLocator).perform();
+        click(RENAME_FOLDER);
+        type(RENAME_INPUT, "NewName");
+        Browser.driver.findElement(RENAME_INPUT).sendKeys(Keys.RETURN);
+        Browser.driver.navigate().refresh();
+        String lastFolderRenamed = Browser.driver.findElement(LAST_FOLDER).getText().trim();
+        System.out.println("The new name of the last folder is: " + lastFolderRenamed);
+        assertFalse(lastFolderRenamed.equals(lastFolderName), "Folder is not renamed");
+    }
+
+    /**
+     * Remove an existing folder and verify it disappears
+     */
+    public static void removeFolder() {
+        int currNumberOfFolders = Browser.driver.findElements(SIDE_MENU_COLLECTION).size();
+        System.out.println("Number of folders: " + currNumberOfFolders);
+        Actions action = new Actions(Browser.driver);
+        WebElement elementLocator = Browser.driver.findElement(LAST_FOLDER);
+        action.contextClick(elementLocator).perform();
+        click(DELETE_FOLDER_OPTION);
+        click(CONFIRM_DELETE_FOLDER);
+        Browser.driver.navigate().refresh();
+        int numberOfFoldersAfterDeletion = Browser.driver.findElements(SIDE_MENU_COLLECTION).size();
+        System.out.println("The number of folders after one is deleted: " + numberOfFoldersAfterDeletion);
+        assertFalse(numberOfFoldersAfterDeletion==currNumberOfFolders, "Folders count not decreasing after deletion of folder");
+    }
+
 }

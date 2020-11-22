@@ -9,21 +9,21 @@ public class FolderTests extends BaseTests {
     @Test
     public void addNewFolder(){
         LogIn.goTo();
-        LogIn.logIn("barny1234", "Barny123456");
+        LogIn.logIn("putUsername", "putPassword");
         Home.addNewFolder();
         //The verification is into the method itself
     }
     @Test
     public void renameAnExistingFolder(){
         LogIn.goTo();
-        LogIn.logIn("barny1234", "Barny123456");
+        LogIn.logIn("putUsername", "putPassword");
         Home.renameFolder();
    //     Home.verifyFolderIsRenamed();
     }
     @Test
     public void removeFolder(){
         LogIn.goTo();
-        LogIn.logIn("barny1234", "Barny123456");
+        LogIn.logIn("putUsername", "putPassword");
         Home.removeFolder();
         //The verification is into the method itself
     }

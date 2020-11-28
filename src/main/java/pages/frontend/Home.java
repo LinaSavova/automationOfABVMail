@@ -36,6 +36,14 @@ public class Home extends BasePage {
     private static final By CONFIRM_DELETE_FOLDER = By.ByLinkText.cssSelector(".cancelButtonWrapper .abv-button:nth-of-type(1)");
     private static final By RENAME_FOLDER = By.xpath("//div[@class='popupContent']//tr[1]/td");
     private static final By RENAME_INPUT = By.cssSelector(".GG3HBNKBJX input");
+    private static final By STATUS_MENU = By.cssSelector(".chatStatusWrapper .gwt-MenuItem");
+    private static final By ONLINE_STATUS = By.xpath("//div[@class='menuPopupMiddleCenterInner menuPopupContent']//tr[1]/td");
+    private static final By STATUS_DISPLAY = By.cssSelector(".abv-chatBlock");
+    private static final By OFFLINE_STATUS = By.xpath("//div[@class='menuPopupMiddleCenterInner menuPopupContent']//tr[2]/td");
+    private static final By INVISIBLE_STATUS = By.xpath("//div[@class='menuPopupMiddleCenterInner menuPopupContent']//tr[3]/td");
+    private static final By DRAFTS_SIDE_MENU = By.xpath("//div[@class='abv-fMl5 abv-BrBot']//tr[@__gwt_row='2']");
+
+
 
     /**
      * Verify user is successfully logged in with right credentials by seeing
@@ -151,6 +159,7 @@ public class Home extends BasePage {
         int numberOfFoldersAfterCreation = Browser.driver.findElements(SIDE_MENU_COLLECTION).size();
         System.out.println("The number of folders after a new one is added: " + numberOfFoldersAfterCreation);
         assertFalse(numberOfFoldersAfterCreation==numberOfFolders, "Folders count not increased");
+
     }
 
     /**
@@ -188,4 +197,64 @@ public class Home extends BasePage {
         assertFalse(numberOfFoldersAfterDeletion==currNumberOfFolders, "Folders count not decreasing after deletion of folder");
     }
 
+    /**
+     * Select user's status to be online
+     */
+    public static void showOnline() {
+        click(STATUS_MENU);
+        click(ONLINE_STATUS);
+    }
+
+    /**
+     * Verify online status is displayed
+     * @param expectedMessage expected message that user is online
+     * @param messageOnFailure a message to appear if user is not showing as online
+     */
+    public static void verifyStatusAsOnline(String expectedMessage, String messageOnFailure) {
+        String actualMessage = Browser.driver.findElement(STATUS_DISPLAY).getText().trim();
+        assertEquals(actualMessage, expectedMessage, messageOnFailure);
+    }
+
+    /**
+     * Select user's status to be offline
+     */
+    public static void showOffline() {
+        click(STATUS_MENU);
+        click(OFFLINE_STATUS);
+    }
+
+    /**
+     * Verify offline status is displayed
+     * @param expectedMessage expected message that user is offline
+     * @param messageOnFailure a message to appear if user is not showing as offline
+     */
+    public static void verifyStatusAsOffline(String expectedMessage, String messageOnFailure) {
+        String actualMessage = Browser.driver.findElement(STATUS_DISPLAY).getText().trim();
+        assertEquals(actualMessage, expectedMessage, messageOnFailure);
+    }
+
+    /**
+     * Select user's status to be invisible
+     */
+    public static void showInvisible() {
+        click(STATUS_MENU);
+        click(INVISIBLE_STATUS);
+    }
+
+    /** Verify invisible status is displayed
+     *
+     * @param expectedMessage expected message that user is invisible
+     * @param messageOnFailure a message to appear if user is not showing as invisible
+     */
+    public static void verifyStatusAsInvisible(String expectedMessage, String messageOnFailure) {
+        String actualMessage = Browser.driver.findElement(STATUS_DISPLAY).getText().trim();
+        assertEquals(actualMessage, expectedMessage, messageOnFailure);
+    }
+
+    /**
+     * Go to Drafts folder in the side menu
+     */
+    public static void goToDrafts() {
+        click(DRAFTS_SIDE_MENU);
+    }
 }

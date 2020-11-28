@@ -1,22 +1,17 @@
 package pages.frontend;
 
+import core.BasePage;
 import org.openqa.selenium.By;
-import org.testng.Assert;
 import utils.Browser;
-import utils.WaitTool;
 
-public class Drafts {
-    private static final By DRAFTS_SIDE_MENU_NEW_ITEMS = By.id("gwt-uid-517");
-    private static final By DRAFT_SAVED_NOTICE = By.cssSelector(".abv-loadingContainer #topLoader");
-
-    /**
-     * Verify draft is saved into Draft folder
-     * @param expectedNotice validation message when draft is successfully saved
-     * @param messageOnFailure message to display if the validation message is not displayed
-     */
-    public static void verifyDraftIsSaved(String expectedNotice, String messageOnFailure) {
-        WaitTool.waitForElementToBeDisplayed(DRAFT_SAVED_NOTICE);
-        String actualNotice = Browser.driver.findElement(DRAFT_SAVED_NOTICE).getText().trim();
-        Assert.assertEquals(actualNotice, expectedNotice, messageOnFailure);
+public class Drafts extends BasePage {
+    private static final By DRAFTS_RECEIVERS_COLLECTION = By.xpath("//div[@class='abv-grayBG']//tr[@__gwt_subrow='0']/td[2]");
+    private static final By EDIT_DRAFT = By.cssSelector(".abv-exclaimText.abv-cursor");
+    private static final By SEND_BUTTON = By.cssSelector(".abv-button");
+    
+    public static void editDraftAndSendIt(int emailNumber) {
+        Browser.driver.findElements(DRAFTS_RECEIVERS_COLLECTION).get(emailNumber).click();
+        click(EDIT_DRAFT);
+        click(SEND_BUTTON);
     }
 }

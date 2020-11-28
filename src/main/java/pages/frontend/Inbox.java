@@ -1,6 +1,5 @@
 package pages.frontend;
 
-import components.Write;
 import core.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -26,6 +25,9 @@ public class Inbox extends BasePage {
     private static final By SIDE_MENU_BIN = By.xpath("//div[@class='abv-fMl5 abv-BrBot']//tr[@__gwt_row='4']");
     private static final By CHECKBOXES_BIN = By.xpath("//div[@class='abv-grayBG']//tr[@__gwt_subrow='0']/td[1]");
     public static final By FROM_SECTION_INBOX = By.xpath("//div[@class='abv-grayBG']//tr[@__gwt_subrow='0']/td[2]");
+    private static final By MARK_AS_READ_OR_UNREAD_SECTION_INBOX = By.xpath("//div[@class='abv-grayBG']//tr[@__gwt_subrow='0']/td[3]//img[2]");
+    private static final By DELETE_SECTION_INBOX = By.xpath("//div[@class='abv-grayBG']//tr[@__gwt_subrow='0']/td[3]//img[1]");
+    private static final By MARK_AS_SPAM_SECTION_INBOX = By.xpath("//div[@class='abv-grayBG']//tr[@__gwt_subrow='0']/td[3]//img[3]");
     private static final By SUBJECT_SECTION_INBOX = By.xpath("//div[@class='abv-grayBG']//tr[@__gwt_subrow='0']/td[5]");
     private static final By All_EMAILS_ROWS = By.xpath("//div[@class='abv-grayBG']//tr[@__gwt_subrow='0']");
     private static final By MARK_DROPDOWN_EMAIL = By.id("gwt-uid-377");
@@ -42,7 +44,6 @@ public class Inbox extends BasePage {
     private static final By MARK_FISHING = By.id("gwt-uid-47");
     private static final By MARK_FISHING_CANCEL = By.xpath("//div[@class='cancelButtonWrapper']//div[@class='abv-button'][2]");
     private static final By MARK_FISHING_CONFIRM = By.xpath("//div[@class='cancelButtonWrapper']//div[@class='abv-button'][1]");
-    private static final By SPAM_FOLDER_NEW = By.cssSelector("#gwt-uid-621 .GG3HBNKBH-");
     private static final By SIDE_MENU_SPAM = By.xpath("//div[@class='abv-fMl5 abv-BrBot']//tr[@__gwt_row='3']");
     private static final By ALL_SPAM_COUNTERS = By.xpath("//td[starts-with(@id, 'gwt-uid-')]/div[@class='GG3HBNKBH-']");
     private static final By NEXT_PAGE_ICON = By.cssSelector(".next");
@@ -54,7 +55,7 @@ public class Inbox extends BasePage {
     private static final By REPLY = By.cssSelector(".abv-letterLinksHolder .abv-letterMItem:nth-of-type(1)");
     private static final By REPLY_TO_ALL = By.cssSelector(".abv-letterLinksHolder .abv-letterMItem:nth-of-type(2)");
     private static final By FORWARD = By.cssSelector(".abv-letterLinksHolder .abv-letterMItem:nth-of-type(3)");
-    private static final By TO_FIELD = By.xpath("//td[@class='clientField']//input[@class='fl']");
+    private static final By TO_FIELD = By.xpath("//td[@class='clientField']//input[@class='fl']"); // !!! it's a collection
     private static final By SEND_BUTTON = By.cssSelector(".abv-button");
     private static final By EMAIL_BODY = By.cssSelector(".gwt-RichTextArea");
     private static final By CLOSE_BUTTON = By.cssSelector(".fl.nav-Close");
@@ -198,12 +199,30 @@ public class Inbox extends BasePage {
         emailCheckbox.click();
         click(MARK_OPTION_UPPER_MENU);
         click(MARK_AS_READ);
-        WebElement emailSelected = Browser.driver.findElements(FROM_SECTION_INBOX).get(emailNumber);
-       // String emailCssValue = emailSelected.getCssValue("font-weight");
-      //  assertEquals(emailCssValue, "400");
         WebElement emailsRows = Browser.driver.findElements(All_EMAILS_ROWS).get(emailNumber);
         String emailClass = emailsRows.getAttribute("class");
         assertFalse(emailClass.contains("unread"));
+    }
+
+
+
+    public static void markAsReadFromRow(int emailNumber) {
+        WebElement emailToBeMarked = Browser.driver.findElements(MARK_AS_READ_OR_UNREAD_SECTION_INBOX).get(emailNumber);
+        emailToBeMarked.click();
+        WebElement emailsRows = Browser.driver.findElements(All_EMAILS_ROWS).get(emailNumber);
+        String emailClass = emailsRows.getAttribute("class");
+        assertFalse(emailClass.contains("unread"));
+
+//        WebElement emailsRowsCurr = Browser.driver.findElements(All_EMAILS_ROWS).get(emailNumber);
+//        String emailClassBefore = emailsRowsCurr.getAttribute("class");
+//
+//        WebElement emailCheckbox = Browser.driver.findElements(CHECKBOXES_INBOX).get(emailNumber);
+//        emailCheckbox.click();
+//        click(MARK_OPTION_UPPER_MENU);
+//        click(MARK_AS_READ);
+//        WebElement emailsRows = Browser.driver.findElements(All_EMAILS_ROWS).get(emailNumber);
+//        String emailClassAfter = emailsRows.getAttribute("class");
+//        assertTrue(emailCheckbox.equals(emailClassBefore), "Email is not marked as opposite");
     }
 
     /**
@@ -438,7 +457,6 @@ public class Inbox extends BasePage {
         WebElement newestEmailSubject = Browser.driver.findElements(SUBJECT_SECTION_INBOX).get(0);
         String actualSubject = newestEmailSubject.getText();
         assertTrue(actualSubject.contains(expectedSubject));
-
     }
-}
 
+}

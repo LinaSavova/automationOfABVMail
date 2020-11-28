@@ -4,10 +4,12 @@ import core.BasePage;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import pages.frontend.Home;
 import pages.frontend.LogIn;
 import utils.Browser;
 import static org.testng.Assert.*;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class Write extends BasePage {
@@ -27,7 +29,7 @@ public class Write extends BasePage {
     private static final By WARNING_INVALID_RECEIVER_EMAIL = By.cssSelector(".dialogBoxExt.abv-alertBox .gwt-HTML .line-Bottom");
     private static final By REFUSE_EMAIL_BUTTON = By.cssSelector(".sendFp1:nth-of-type(6)");
     private static final By ATTACHMENT = By.cssSelector(".attachment-b.abv-ico");
-
+    private static final By DRAFTS_RECEIVERS_COLLECTION = By.xpath("//div[@class='abv-grayBG']//tr[@__gwt_subrow='0']/td[2]");
     /**
      * Write an email using the form from the upper left corner
      */
@@ -63,8 +65,11 @@ public class Write extends BasePage {
      * @param emailBody body of the email
      */
     public static void sendEmail(String emailReceiver, String subject, String emailBody) {
-        clear(TO_FIELD);
-        type(TO_FIELD, emailReceiver);
+        List<WebElement> fieldsWithInput = Browser.driver.findElements(TO_FIELD);
+        WebElement toField = fieldsWithInput.get(0);
+        toField.clear();
+        toField.sendKeys(emailReceiver);
+
         type(SUBJECT_FIELD, subject);
         type(EMAIL_BODY, emailBody);
         click(SEND_BUTTON);
@@ -101,11 +106,19 @@ public class Write extends BasePage {
         assertFalse(actualDisplay.isSelected(), messageOnFailure);
     }
     /**
-     * Save a draft
+     * Save a draft and verify it is added to Drafts folder
      */
-    public static void saveDraft() {
+    public static void saveDraft(String messageOnFailure) {
+        Home.goToDrafts();
+        int emailsInDrafts = Browser.driver.findElements(DRAFTS_RECEIVERS_COLLECTION).size();
+        System.out.println("Emails in Drafts are: " + emailsInDrafts);
+        Write.createEmail();
         click(SAVE_IN_DRAFTS_TAB);
-        Browser.driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+        Browser.driver.navigate().refresh();
+        Home.goToDrafts();
+        int emailsCountAfterOneAdded = Browser.driver.findElements(DRAFTS_RECEIVERS_COLLECTION).size();
+        System.out.println("Emails in Drafts after one email is added: " + emailsCountAfterOneAdded);
+        assertFalse(emailsCountAfterOneAdded==emailsInDrafts, messageOnFailure);
     }
     /**
      * Fill in only To field
@@ -195,6 +208,5 @@ public class Write extends BasePage {
         assertTrue(alertText.contains("Сигурни ли сте, че искате да прекъснете писането на това писмо?"));
         alert.dismiss();
     }
-
 
 }

@@ -4,5 +4,3 @@
 ##### - Page object model 
 ##### - Static method used
 ##### - Positive and negative tests included
-
-![abv](/home/lina/Pictures/abv.png)

@@ -4,4 +4,4 @@
 ##### - Page object model 
 ##### - Static method used
 ##### - Positive and negative tests included
-[![abv](/home/lina/Desktop/download.png)](https://www.abv.bg/)
+![abv](/home/lina/Desktop/download.png)

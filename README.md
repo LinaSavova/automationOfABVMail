@@ -4,4 +4,5 @@
 ##### - Page object model 
 ##### - Static method used
 ##### - Positive and negative tests included
-![abv](/home/lina/Desktop/download.png)
+
+[![abv](/home/lina/Pictures/abv.png "bg email service")](https://www.abv.bg/)

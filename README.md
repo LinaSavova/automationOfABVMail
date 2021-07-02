@@ -5,4 +5,4 @@
 ##### - Static method used
 ##### - Positive and negative tests included
 
-[![abv](/home/lina/Pictures/abv.png "bg email service")](https://www.abv.bg/)
+![abv](/home/lina/Pictures/abv.png)

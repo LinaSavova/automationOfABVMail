@@ -9,13 +9,13 @@
 
 ## Credentials used in our tests
 
-1. **Django admin**
+**1.Django admin**
  
 ADMIN_EMAIL = <admin@kjfga.tr>
 
 ADMIN_PASSWORD = "vijfjfjfjfay"
 
-2. **Regular email** 
+**2.Regular email** 
 
 USER_NAME = "kraffffsi"
 

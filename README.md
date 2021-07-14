@@ -12,7 +12,7 @@
 **1.Django admin**
  
 > ADMIN_EMAIL = <admin@kjfga.tr>
-
+> 
 > ADMIN_PASSWORD = "vijfjfjfjfay"
 
 

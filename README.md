@@ -11,9 +11,9 @@
 
 #### **1.Django admin**
 
-#### > ADMIN_EMAIL = <admin@v>
+###### > ADMIN_EMAIL = <admin@v>
 > 
-#### > ADMIN_PASSWORD = "ay"
+###### > ADMIN_PASSWORD = "ay"
 
 #### **2.Regular email** 
 

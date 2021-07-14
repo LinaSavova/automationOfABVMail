@@ -9,11 +9,13 @@
 
 ## Credentials used in our tests
 
+
 **1.Django admin**
  
 ADMIN_EMAIL = <admin@kjfga.tr>
 
 ADMIN_PASSWORD = "vijfjfjfjfay"
+
 
 **2.Regular email** 
 
@@ -23,11 +25,13 @@ USER_EMAIL = <k+tests@h.kio>
 
 USER_PASSWORD = "krts@hac.yo"
 
+
 3. Google credentials
 
 GOOGLE_EMAIL = <tjfjfja@gmail.com>
 
 GOOGLE_PASSWORD = "fjfjfla@gmail.com"
+
 
 4. Facebook credentials
 

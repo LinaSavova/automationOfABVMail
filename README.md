@@ -11,16 +11,16 @@
 
 #### **1.Django admin**
 
-> ADMIN_EMAIL = <admin@v>
+#### > ADMIN_EMAIL = <admin@v>
 > 
-> ADMIN_PASSWORD = "ay"
+#### > ADMIN_PASSWORD = "ay"
 
-**2.Regular email** 
+#### **2.Regular email** 
 
-> USER_NAME = "krasi"
+#### > USER_NAME = "krasi"
 > 
-> USER_EMAIL = <krasi+t.io>
+#### > USER_EMAIL = <krasi+t.io>
 > 
-> USER_PASSWORD = "krksoft.io"
+#### > USER_PASSWORD = "krksoft.io"
 
 
